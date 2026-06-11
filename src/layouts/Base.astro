@@ -12,11 +12,13 @@ const t = {
     title: 'vontus · Taller de software',
     description:
       'Alberto Martínez — taller de software a medida. Desarrollo de aplicaciones, bots y automatización.',
+    contacto: 'Contacto',
   },
   en: {
     title: 'vontus · Software studio',
     description:
       'Alberto Martínez — a software studio. Custom web apps, bots and automation.',
+    contacto: 'Contact',
   },
 };
 
@@ -51,6 +53,7 @@ const enPath = isEn ? path : path === '/' ? '/en' : `/en${path}`;
       <div class="container">
         <a class="brand" href={prefix || '/'}>vontus<span>.</span></a>
         <nav class="nav">
+          <a href={`${prefix}/contacto`}>{s.contacto}</a>
           <span class="lang">
             <a href={esPath} class={lang === 'es' ? 'active' : ''} hreflang="es">ES</a>
             <a href={enPath} class={lang === 'en' ? 'active' : ''} hreflang="en">EN</a>
