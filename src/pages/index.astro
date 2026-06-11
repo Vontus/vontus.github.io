@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+
+const proyectos = [
+  {
+    nombre: 'Pinatarius · Galería',
+    desc: 'Galería digital del proyecto Pinatarius 2026. Exposición online de la colección.',
+    tags: ['Web', 'Galería'],
+    url: 'https://vontus.github.io/pinatarius-2026-galeria/',
+    source: 'https://github.com/vontus/pinatarius-2026-galeria',
+  },
+  {
+    nombre: 'UrbanDictionaryBot',
+    desc: 'Bot de Telegram que busca definiciones de Urban Dictionary, con consultas inline y palabra del día.',
+    tags: ['TypeScript', 'Telegram'],
+    url: 'https://t.me/urbandictionarybot',
+    source: 'https://github.com/vontus/UrbanDictionaryBot',
+  },
+];
+---
+
+<Base>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Taller de software</p>
+      <h1>Hago software con oficio, a medida y bien acabado.</h1>
+      <p class="lead">
+        Soy Alberto Martínez. Diseño y construyo aplicaciones web, bots y
+        automatización — desde la idea hasta que está funcionando en producción.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/contacto">Hablemos</a>
+        <a class="btn btn-ghost" href="/#proyectos">Ver proyectos</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="container">
+      <h2 class="section-title">Proyectos</h2>
+      <p class="section-intro">
+        Una muestra de lo que sale del taller. Casi todo abierto en GitHub.
+      </p>
+      <div class="cards">
+        {
+          proyectos.map((p) => (
+            <article class="card">
+              <h3>
+                <a href={p.url} rel="noopener" target="_blank">
+                  {p.nombre}
+                </a>
+              </h3>
+              <p>{p.desc}</p>
+              <div class="card-foot">
+                <div class="tags">
+                  {p.tags.map((t) => (
+                    <span class="tag">{t}</span>
+                  ))}
+                </div>
+                <a class="source" href={p.source} rel="noopener" target="_blank">
+                  código ↗
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

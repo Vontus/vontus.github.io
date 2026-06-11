@@ -1,0 +1,84 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'es' | 'en';
+}
+
+const t = {
+  es: {
+    title: 'vontus · Taller de software',
+    description:
+      'Alberto Martínez — taller de software a medida. Desarrollo de aplicaciones, bots y automatización.',
+    proyectos: 'Proyectos',
+  },
+  en: {
+    title: 'vontus · Software studio',
+    description:
+      'Alberto Martínez — a software studio. Custom web apps, bots and automation.',
+    proyectos: 'Work',
+  },
+};
+
+const { lang = 'es' } = Astro.props;
+const s = t[lang];
+const { title = s.title, description = s.description } = Astro.props;
+
+const prefix = lang === 'en' ? '/en' : '';
+const year = new Date().getFullYear();
+
+// URL equivalente en el otro idioma (para el selector).
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isEn = path === '/en' || path.startsWith('/en/');
+const esPath = isEn ? path.replace(/^\/en/, '') || '/' : path;
+const enPath = isEn ? path : path === '/' ? '/en' : `/en${path}`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" hreflang="es" href={`https://vontus.dev${esPath}`} />
+    <link rel="alternate" hreflang="en" href={`https://vontus.dev${enPath}`} />
+    <meta name="color-scheme" content="light dark" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href={prefix || '/'}>vontus<span>.</span></a>
+        <nav class="nav">
+          <a href={`${prefix}/#proyectos`}>{s.proyectos}</a>
+          <span class="lang">
+            <a href={esPath} class={lang === 'es' ? 'active' : ''} hreflang="es">ES</a>
+            <a href={enPath} class={lang === 'en' ? 'active' : ''} hreflang="en">EN</a>
+          </span>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>© {year} Alberto Martínez · vontus</span>
+        <span>
+          <a href="mailto:hola@vontus.dev">hola@vontus.dev</a> ·
+          <a href="https://github.com/vontus" rel="me noopener" target="_blank">GitHub</a> ·
+          <a
+            href="https://www.linkedin.com/in/alberto-mart%C3%ADnez-bern%C3%A1-67945a167/"
+            rel="me noopener"
+            target="_blank">LinkedIn</a
+          >
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

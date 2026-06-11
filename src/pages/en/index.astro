@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const projects = [
+  {
+    name: 'Pinatarius · Gallery',
+    desc: 'Digital gallery for the Pinatarius 2026 project. The collection, online.',
+    tags: ['Web', 'Gallery'],
+    url: 'https://vontus.github.io/pinatarius-2026-galeria/',
+    source: 'https://github.com/vontus/pinatarius-2026-galeria',
+  },
+  {
+    name: 'UrbanDictionaryBot',
+    desc: 'A Telegram bot that looks up Urban Dictionary definitions, with inline queries and a word of the day.',
+    tags: ['TypeScript', 'Telegram'],
+    url: 'https://t.me/urbandictionarybot',
+    source: 'https://github.com/vontus/UrbanDictionaryBot',
+  },
+];
+---
+
+<Base lang="en">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Software studio</p>
+      <h1>I build software with care — bespoke, and built to last.</h1>
+      <p class="lead">
+        I'm Alberto Martínez. I design and build web apps, bots and automation —
+        from idea to production.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/en/contacto">Let's talk</a>
+        <a class="btn btn-ghost" href="/en/#proyectos">View work</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="container">
+      <h2 class="section-title">Work</h2>
+      <p class="section-intro">A sample of what comes out of the studio. Mostly open on GitHub.</p>
+      <div class="cards">
+        {
+          projects.map((p) => (
+            <article class="card">
+              <h3>
+                <a href={p.url} rel="noopener" target="_blank">
+                  {p.name}
+                </a>
+              </h3>
+              <p>{p.desc}</p>
+              <div class="card-foot">
+                <div class="tags">
+                  {p.tags.map((t) => (
+                    <span class="tag">{t}</span>
+                  ))}
+                </div>
+                <a class="source" href={p.source} rel="noopener" target="_blank">
+                  source ↗
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
