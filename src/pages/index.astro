@@ -1,7 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const proyectos = [
+type Proyecto = {
+  nombre: string;
+  desc: string;
+  tags: string[];
+  url?: string;
+  source?: string;
+};
+
+const proyectos: Proyecto[] = [
+  {
+    nombre: 'Taller Martínez',
+    desc: 'Marca de servicios de informática para negocios locales: web, datos, copias de seguridad, redes e IA. Landing hecha con Astro.',
+    tags: ['Astro', 'Landing'],
+    url: 'https://tallermartinez.net',
+    source: 'https://github.com/Vontus/tallermartinez.dev',
+  },
+  {
+    nombre: 'warden',
+    desc: 'Sistema GitOps pull-based: despliega servicios self-hosted (bots, daemons) en Linux con systemd, sin exponer el equipo a internet.',
+    tags: ['Bash', 'GitOps', 'systemd'],
+  },
   {
     nombre: 'Pinatarius · Galería',
     desc: 'Galería digital del proyecto Pinatarius 2026. Exposición online de la colección.',
@@ -45,9 +65,13 @@ const proyectos = [
           proyectos.map((p) => (
             <article class="card">
               <h3>
-                <a href={p.url} rel="noopener" target="_blank">
-                  {p.nombre}
-                </a>
+                {p.url ? (
+                  <a href={p.url} rel="noopener" target="_blank">
+                    {p.nombre}
+                  </a>
+                ) : (
+                  p.nombre
+                )}
               </h3>
               <p>{p.desc}</p>
               <div class="card-foot">
@@ -56,9 +80,11 @@ const proyectos = [
                     <span class="tag">{t}</span>
                   ))}
                 </div>
-                <a class="source" href={p.source} rel="noopener" target="_blank">
-                  código ↗
-                </a>
+                {p.source && (
+                  <a class="source" href={p.source} rel="noopener" target="_blank">
+                    código ↗
+                  </a>
+                )}
               </div>
             </article>
           ))
