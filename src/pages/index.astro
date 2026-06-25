@@ -7,6 +7,7 @@ type Proyecto = {
   tags: string[];
   url?: string;
   source?: string;
+  closed?: boolean;
 };
 
 const proyectos: Proyecto[] = [
@@ -21,6 +22,7 @@ const proyectos: Proyecto[] = [
     nombre: 'warden',
     desc: 'Sistema GitOps pull-based: despliega servicios self-hosted (bots, daemons) en Linux con systemd, sin exponer el equipo a internet.',
     tags: ['Bash', 'GitOps', 'systemd'],
+    closed: true,
   },
   {
     nombre: 'Pinatarius · Galería',
@@ -80,10 +82,12 @@ const proyectos: Proyecto[] = [
                     <span class="tag">{t}</span>
                   ))}
                 </div>
-                {p.source && (
+                {p.source ? (
                   <a class="source" href={p.source} rel="noopener" target="_blank">
                     código ↗
                   </a>
+                ) : (
+                  p.closed && <span class="source closed">código cerrado</span>
                 )}
               </div>
             </article>

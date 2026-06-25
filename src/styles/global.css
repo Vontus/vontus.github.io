@@ -258,6 +258,13 @@ section {
 .card .source:hover {
   color: var(--accent);
 }
+.card .source.closed {
+  cursor: default;
+  opacity: 0.65;
+}
+.card .source.closed:hover {
+  color: var(--ink-soft);
+}
 .tag {
   font-family: var(--mono);
   font-size: 0.72rem;
