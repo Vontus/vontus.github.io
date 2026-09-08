@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import icon from '../../assets/moone/icon.png';
+import home from '../../assets/moone/home.jpg';
+import movimiento from '../../assets/moone/movimiento.jpg';
+import calculadora from '../../assets/moone/calculadora.jpg';
+import cuentas from '../../assets/moone/cuentas.jpg';
+
+const screens = [
+  { src: home, alt: 'Pantalla de inicio de Moone: patrimonio neto y resumen diario', caption: 'Inicio' },
+  {
+    src: movimiento,
+    alt: 'Edición de un movimiento en Moone, con concepto, categoría y cuenta',
+    caption: 'Editar movimiento',
+  },
+  {
+    src: calculadora,
+    alt: 'Calculadora integrada en Moone para calcular importes al apuntar un movimiento',
+    caption: 'Calculadora integrada',
+  },
+  { src: cuentas, alt: 'Listado de cuentas de Moone, con activos y pasivos', caption: 'Cuentas' },
+];
+---
+
+<Base
+  title="Moone · vontus"
+  description="Moone, la app de finanzas personales que estoy construyendo: cuentas, presupuestos y patrimonio, con los datos siempre en tu móvil."
+>
+  <section class="hero moone-hero">
+    <div class="container">
+      <a class="back-link" href="/#proyectos">&larr; Proyectos</a>
+      <div class="moone-heading">
+        <Image src={icon} alt="" width={72} height={72} class="moone-icon" />
+        <div>
+          <p class="eyebrow">App para Android</p>
+          <h1>Moone</h1>
+        </div>
+      </div>
+      <p class="lead">
+        Finanzas personales sin nubes ni cuentas: todo se queda en tu móvil. La estoy
+        construyendo para llevar las mías, con calma y sin prisa.
+      </p>
+      <div class="cta-row">
+        <span class="status-pill">En desarrollo · aún sin publicar</span>
+        <a class="btn btn-ghost" href="/moone/privacy">Política de privacidad</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="moone-features">
+    <div class="container">
+      <h2 class="section-title">Qué hace</h2>
+      <ul class="feature-list">
+        <li>Patrimonio neto y evolución de ingresos y gastos, de un vistazo.</li>
+        <li>
+          Movimientos con categoría, cuenta, notas y etiquetas — con una calculadora integrada
+          para repartir gastos entre varias personas.
+        </li>
+        <li>Cuentas y tarjetas agrupadas, con activos y pasivos siempre claros.</li>
+        <li>Presupuestos y resúmenes diarios, semanales y mensuales.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="moone-screens">
+    <div class="container">
+      <h2 class="section-title">Capturas</h2>
+      <p class="section-intro">Con datos de prueba, del modo demo que trae la propia app.</p>
+      <div class="screens">
+        {
+          screens.map((s) => (
+            <figure class="phone-frame">
+              <div class="phone-body">
+                <Image src={s.src} alt={s.alt} width={420} format="webp" quality={82} />
+              </div>
+              <figcaption>{s.caption}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="moone-tech">
+    <div class="container prose">
+      <h2>Cómo está hecha</h2>
+      <p>
+        Nativa para Android, en Kotlin y Jetpack Compose. De momento es de código cerrado; si
+        algún día la publico, lo diré aquí.
+      </p>
+      <p>
+        Todos los datos viven en el dispositivo: sin servidor propio, sin analíticas, sin
+        cuentas. Más detalle en la <a href="/moone/privacy">política de privacidad</a>.
+      </p>
+    </div>
+  </section>
+</Base>

@@ -25,6 +25,13 @@ const proyectos: Proyecto[] = [
     closed: true,
   },
   {
+    nombre: 'Moone',
+    desc: 'App de finanzas personales para Android: cuentas, presupuestos, patrimonio y gráficos, con los datos siempre en el dispositivo.',
+    tags: ['Kotlin', 'Compose', 'Android'],
+    url: '/moone',
+    closed: true,
+  },
+  {
     nombre: 'Pinatarius · Galería',
     desc: 'Galería digital del proyecto Pinatarius 2026. Exposición online de la colección.',
     tags: ['Web', 'Galería'],
@@ -68,9 +75,13 @@ const proyectos: Proyecto[] = [
             <article class="card">
               <h3>
                 {p.url ? (
-                  <a href={p.url} rel="noopener" target="_blank">
-                    {p.nombre}
-                  </a>
+                  p.url.startsWith('/') ? (
+                    <a href={p.url}>{p.nombre}</a>
+                  ) : (
+                    <a href={p.url} rel="noopener" target="_blank">
+                      {p.nombre}
+                    </a>
+                  )
                 ) : (
                   p.nombre
                 )}
