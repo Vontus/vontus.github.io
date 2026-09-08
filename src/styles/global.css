@@ -274,7 +274,7 @@ section {
   padding: 0.15rem 0.6rem;
 }
 
-/* ---- Moone project page ---- */
+/* ---- Individual project pages ---- */
 .back-link {
   display: inline-block;
   font-family: var(--mono);
@@ -286,19 +286,19 @@ section {
 .back-link:hover {
   color: var(--accent);
 }
-.moone-heading {
+.project-heading {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.moone-heading .eyebrow {
+.project-heading .eyebrow {
   margin: 0 0 0.2rem;
 }
-.moone-heading h1 {
+.project-heading h1 {
   margin: 0;
 }
-.moone-icon {
+.project-icon {
   border-radius: 22%;
   flex-shrink: 0;
 }
