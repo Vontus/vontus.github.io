@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../../layouts/Base.astro';
+import icon from '../../../assets/moone/icon.png';
+import home from '../../../assets/moone/home.jpg';
+import movimiento from '../../../assets/moone/movimiento.jpg';
+import calculadora from '../../../assets/moone/calculadora.jpg';
+import cuentas from '../../../assets/moone/cuentas.jpg';
+
+const screens = [
+  { src: home, alt: "Moone's home screen: net worth and daily summary", caption: 'Home' },
+  {
+    src: movimiento,
+    alt: 'Editing a transaction in Moone, with concept, category and account',
+    caption: 'Editing a transaction',
+  },
+  {
+    src: calculadora,
+    alt: "Moone's built-in calculator for working out an amount while logging a transaction",
+    caption: 'Built-in calculator',
+  },
+  { src: cuentas, alt: "Moone's accounts list, with assets and liabilities", caption: 'Accounts' },
+];
+---
+
+<Base
+  lang="en"
+  title="Moone · vontus"
+  description="Moone, the personal finance app I'm building: accounts, budgets and net worth, with data that never leaves your phone."
+>
+  <section class="hero">
+    <div class="container">
+      <a class="back-link" href="/en/#proyectos">&larr; Projects</a>
+      <div class="project-heading">
+        <Image src={icon} alt="" width={72} height={72} class="project-icon" />
+        <div>
+          <p class="eyebrow">Android app</p>
+          <h1>Moone</h1>
+        </div>
+      </div>
+      <p class="lead">
+        Personal finance with no cloud and no accounts — everything stays on your phone. I'm
+        building it to run my own finances, at my own pace.
+      </p>
+      <div class="cta-row">
+        <span class="status-pill">In development · not yet published</span>
+        <a class="btn btn-ghost" href="/moone/privacy">Privacy policy</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">What it does</h2>
+      <ul class="feature-list">
+        <li>Net worth and income/expense trends, at a glance.</li>
+        <li>
+          Transactions with category, account, notes and tags — with a built-in calculator for
+          splitting bills between people.
+        </li>
+        <li>Accounts and cards grouped together, assets and liabilities always clear.</li>
+        <li>Budgets and daily, weekly and monthly summaries.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Screenshots</h2>
+      <p class="section-intro">Shown with test data, from the app's own demo mode.</p>
+      <div class="screens">
+        {
+          screens.map((s) => (
+            <figure class="phone-frame">
+              <div class="phone-body">
+                <Image src={s.src} alt={s.alt} width={420} format="webp" quality={82} />
+              </div>
+              <figcaption>{s.caption}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container prose">
+      <h2>How it's built</h2>
+      <p>
+        Native Android, in Kotlin and Jetpack Compose. Closed source for now — if I ever publish
+        it, I'll say so here.
+      </p>
+      <p>
+        All data lives on the device: no server of my own, no analytics, no accounts. More detail
+        in the <a href="/moone/privacy">privacy policy</a> (currently only in Spanish).
+      </p>
+    </div>
+  </section>
+</Base>
