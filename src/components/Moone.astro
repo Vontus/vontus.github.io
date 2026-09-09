@@ -4,21 +4,10 @@ import Base from '../layouts/Base.astro';
 import { m } from '../paraglide/messages.js';
 import { localizeHref } from '../paraglide/runtime.js';
 import icon from '../assets/moone/icon.png';
-import home from '../assets/moone/home.jpg';
-import movimiento from '../assets/moone/movimiento.jpg';
-import calculadora from '../assets/moone/calculadora.jpg';
-import cuentas from '../assets/moone/cuentas.jpg';
+import { getMooneFeatures, getMooneScreens } from '../i18n/content';
 
-// Estructura (idéntica en los dos idiomas): qué imagen va en cada hueco.
-// alt/caption son mensajes: moone_screen_{i}_alt / _caption.
-const screens = [
-  { src: home, alt: m.moone_screen_0_alt(), caption: m.moone_screen_0_caption() },
-  { src: movimiento, alt: m.moone_screen_1_alt(), caption: m.moone_screen_1_caption() },
-  { src: calculadora, alt: m.moone_screen_2_alt(), caption: m.moone_screen_2_caption() },
-  { src: cuentas, alt: m.moone_screen_3_alt(), caption: m.moone_screen_3_caption() },
-];
-
-const features = [m.moone_feature_0(), m.moone_feature_1(), m.moone_feature_2(), m.moone_feature_3()];
+const screens = getMooneScreens();
+const features = getMooneFeatures();
 ---
 
 <Base title={m.moone_meta_title()} description={m.moone_meta_description()}>
