@@ -1,62 +1,55 @@
 ---
 import '../styles/global.css';
+import { m } from '../paraglide/messages.js';
+import { getLocale, locales, localizeHref, deLocalizeHref } from '../paraglide/runtime.js';
 
 interface Props {
   title?: string;
   description?: string;
-  lang?: 'es' | 'en';
 }
 
-const t = {
-  es: {
-    title: 'vontus · Taller de software',
-    description:
-      'Alberto Martínez — taller de software a medida. Desarrollo de aplicaciones, bots y automatización.',
-    contacto: 'Contacto',
-  },
-  en: {
-    title: 'vontus · Software studio',
-    description:
-      'Alberto Martínez — a software studio. Custom web apps, bots and automation.',
-    contacto: 'Contact',
-  },
-};
+const { title = m.base_title(), description = m.base_description() } = Astro.props;
 
-const { lang = 'es' } = Astro.props;
-const s = t[lang];
-const { title = s.title, description = s.description } = Astro.props;
-
-const prefix = lang === 'en' ? '/en' : '';
+const locale = getLocale();
 const year = new Date().getFullYear();
 
-// URL equivalente en el otro idioma (para el selector).
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const isEn = path === '/en' || path.startsWith('/en/');
-const esPath = isEn ? path.replace(/^\/en/, '') || '/' : path;
-const enPath = isEn ? path : path === '/' ? '/en' : `/en${path}`;
+// Ruta canónica (sin prefijo de idioma) de la página actual, para generar el
+// selector de idioma y el hreflang con localizeHref(). Se quita la barra
+// final (salvo en "/") para que las URLs generadas coincidan con las que
+// escribía a mano el código anterior.
+const normalizedPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const canonicalPath = deLocalizeHref(normalizedPath);
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate" hreflang="es" href={`https://vontus.dev${esPath}`} />
-    <link rel="alternate" hreflang="en" href={`https://vontus.dev${enPath}`} />
+    {
+      locales.map((l) => (
+        <link rel="alternate" hreflang={l} href={`https://vontus.dev${localizeHref(canonicalPath, { locale: l })}`} />
+      ))
+    }
     <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
   </head>
   <body>
     <header class="site-header">
       <div class="container">
-        <a class="brand" href={prefix || '/'}>vontus<span>.</span></a>
+        <a class="brand" href={localizeHref('/')}>vontus<span>.</span></a>
         <nav class="nav">
-          <a href={`${prefix}/contacto`}>{s.contacto}</a>
+          <a href={localizeHref('/contacto')}>{m.nav_contacto()}</a>
           <span class="lang">
-            <a href={esPath} class={lang === 'es' ? 'active' : ''} hreflang="es">ES</a>
-            <a href={enPath} class={lang === 'en' ? 'active' : ''} hreflang="en">EN</a>
+            {
+              locales.map((l) => (
+                <a href={localizeHref(canonicalPath, { locale: l })} class={l === locale ? 'active' : ''} hreflang={l}>
+                  {l.toUpperCase()}
+                </a>
+              ))
+            }
           </span>
         </nav>
       </div>

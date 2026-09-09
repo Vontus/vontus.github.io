@@ -1,0 +1,10 @@
+---
+import Home from '../../components/Home.astro';
+import { setLocaleFromParams } from '../../i18n/routing';
+
+export { getStaticPaths } from '../../i18n/routing';
+
+setLocaleFromParams(Astro.params.locale);
+---
+
+<Home />

@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { m } from '../paraglide/messages.js';
+
+const contactEmail = 'alberto@vontus.dev';
+const legalEmail = 'legal@vontus.dev';
+---
+
+<Base title={m.contacto_meta_title()} description={m.contacto_meta_description()}>
+  <section class="hero">
+    <div class="container prose">
+      <p class="eyebrow">{m.contacto_eyebrow()}</p>
+      <h1>{m.contacto_h1()}</h1>
+      <p class="lead">{m.contacto_lead()}</p>
+
+      <h2>{m.contacto_general_heading()}</h2>
+      <p>
+        <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      </p>
+
+      <h2>{m.contacto_legal_heading()}</h2>
+      <p>
+        {m.contacto_legal_body()}
+        <br />
+        <a href={`mailto:${legalEmail}`}>{legalEmail}</a>
+      </p>
+
+      <h2>{m.contacto_online_heading()}</h2>
+      <p>
+        <a href="https://github.com/vontus" rel="me noopener" target="_blank">github.com/vontus</a>
+        <br />
+        <a
+          href="https://www.linkedin.com/in/alberto-mart%C3%ADnez-bern%C3%A1-67945a167/"
+          rel="me noopener"
+          target="_blank">LinkedIn — Alberto Martínez Berná</a
+        >
+      </p>
+    </div>
+  </section>
+</Base>

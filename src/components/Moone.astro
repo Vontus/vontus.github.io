@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { m } from '../paraglide/messages.js';
+import { localizeHref } from '../paraglide/runtime.js';
+import icon from '../assets/moone/icon.png';
+import { getMooneFeatures, getMooneScreens } from '../i18n/content';
+
+const screens = getMooneScreens();
+const features = getMooneFeatures();
+---
+
+<Base title={m.moone_meta_title()} description={m.moone_meta_description()}>
+  <section class="hero">
+    <div class="container">
+      <a class="back-link" href={`${localizeHref('/')}#proyectos`}>&larr; {m.moone_back_label()}</a>
+      <div class="project-heading">
+        <Image src={icon} alt="" width={72} height={72} class="project-icon" />
+        <div>
+          <p class="eyebrow">{m.moone_eyebrow()}</p>
+          <h1>Moone</h1>
+        </div>
+      </div>
+      <p class="lead">{m.moone_lead()}</p>
+      <div class="cta-row">
+        <span class="status-pill">{m.moone_status_pill()}</span>
+        <a class="btn btn-ghost" href="/moone/privacy">{m.moone_privacy_link_label()}</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">{m.moone_features_title()}</h2>
+      <ul class="feature-list">
+        {features.map((f) => <li>{f}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">{m.moone_screens_title()}</h2>
+      <p class="section-intro">{m.moone_screens_intro()}</p>
+      <div class="screens">
+        {
+          screens.map((s) => (
+            <figure class="phone-frame">
+              <div class="phone-body">
+                <Image src={s.src} alt={s.alt} width={420} format="webp" quality={82} />
+              </div>
+              <figcaption>{s.caption}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container prose">
+      <h2>{m.moone_how_title()}</h2>
+      <p>{m.moone_how_body_1()}</p>
+      <p>
+        {m.moone_how_body_2_pre()}<a href="/moone/privacy">{m.moone_how_body_2_link_label()}</a>{m.moone_how_body_2_suffix()}
+      </p>
+    </div>
+  </section>
+</Base>
