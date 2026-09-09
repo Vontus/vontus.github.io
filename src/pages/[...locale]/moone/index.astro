@@ -1,15 +1,10 @@
 ---
 import Moone from '../../../components/Moone.astro';
-import { locales, setLocale, type Locale } from '../../../paraglide/runtime.js';
+import { setLocaleFromParams } from '../../../i18n/routing';
 
-export function getStaticPaths() {
-  return locales.map((locale) => ({
-    params: { locale: locale === 'es' ? undefined : locale },
-  }));
-}
+export { getStaticPaths } from '../../../i18n/routing';
 
-const locale: Locale = Astro.params.locale === 'en' ? 'en' : 'es';
-setLocale(locale);
+setLocaleFromParams(Astro.params.locale);
 ---
 
 <Moone />
