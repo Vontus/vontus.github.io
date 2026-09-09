@@ -1,0 +1,15 @@
+---
+import Contacto from '../../components/Contacto.astro';
+import { locales, setLocale, type Locale } from '../../paraglide/runtime.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({
+    params: { locale: locale === 'es' ? undefined : locale },
+  }));
+}
+
+const locale: Locale = Astro.params.locale === 'en' ? 'en' : 'es';
+setLocale(locale);
+---
+
+<Contacto />

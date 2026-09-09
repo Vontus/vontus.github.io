@@ -1,5 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { setLocale } from '../../paraglide/runtime.js';
+
+// Página sin versión en inglés: no pasa por el routing [[locale]] de
+// Paraglide, pero fijamos el locale explícitamente para que Base.astro
+// (lang, hreflang, textos del layout) renderice en español siempre,
+// independientemente del último locale fijado durante el build estático.
+setLocale('es');
 ---
 
 <Base
